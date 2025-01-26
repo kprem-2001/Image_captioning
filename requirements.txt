@@ -1,0 +1,7 @@
+gdown
+dataclasses
+transformers
+datasets==2.13.1
+torch
+flask
+-e .
