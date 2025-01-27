@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Upload with Caption</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #2c3e50, #34495e); /* Dark theme gradient */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .upload-container {
+            background-color: rgba(0, 0, 0, 0.5); /* Dark background with transparency */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .upload-container h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }  
+        .upload-label {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .upload-label:hover {
+            background-color: #2980b9;
+        }
+
+        .upload-container h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        #photo-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 20px;
+            display: none;
+            align-content: center;
+            
+        }
+        #caption-input {
+            width: 93%;
+            padding: 10px;
+            margin-top: 10px; /* Adjust margin-top for alignment */
+            margin-bottom: 20px;  /* Add margin-bottom for spacing */
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            resize: vertical;
+            background-color: #7db8df; /* Lighter background color with transparency */
+            color: #333; /* Text color */
+        }
+
+        #submit-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #submit-button:hover {
+            background-color: #2980b9;
+        }
+        #file-upload{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class= 'upload-container'>
+        <h2>Upload a Photo</h2>
+        <form id="photo-form" method='post' action="/" enctype = "multipart/form-data">
+            <label for="file-upload" class="upload-label" required>Choose Image</label>
+            <input type="file" id ='file-upload' name='Image' required>
+            <img src="" id="photo-preview" alt="Uploaded Photo">
+            <textarea id="caption-input" rows=4 readonly>Caption: {{caption}}</textarea>
+            <button id='submit-button' type="submit" value ="Upload">Upload Photo</button>
+        </form>
+</div>
+<script>
+    // Display selected image in the preview
+    const fileUpload = document.getElementById('file-upload');
+    const imagePreview = document.getElementById('photo-preview');
+    const textArea = document.getElementById('caption-input');
+    const generateButton = document.getElementById('submit-button'); // Added the generate button
+
+    fileUpload.addEventListener('change', function () {
+        const file = fileUpload.files[0];
+        if(file){
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                textArea.style.display = 'block';
+                generateButton.style.display = 'block';
+                textArea.value = 'Caption: None'
+            }
+            reader.readAsDataURL(file);
+        }
+
+    });
+    // Add an event listener to the generate button
+    
+    
+</script>
+</body>
+</html>
