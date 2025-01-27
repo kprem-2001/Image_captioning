@@ -44,7 +44,7 @@ class ModelTrainer:
                     line_count += 1
                     try:
                         img_name, caption = line.split(",", 1)  # Split only on the first comma
-                        img_path = os.path.join(self.model_trainer_config.data_path, "images", img_name.strip())
+                        img_path = os.path.join(self.model_trainer_config.data_path, "Images", img_name.strip())
 
                         if current_image and current_image != img_name:  # If the image name changes, save the previous image's captions
                             image_files.append(current_image)
@@ -159,7 +159,7 @@ class ImageCaptioningDataset(TorchDataset):
 
     def __getitem__(self, idx):
         item = self.dataset[idx]
-        img_path = os.path.join(self.data_path, "images", item['image'])  # Correct the path usage here
+        img_path = os.path.join(self.data_path, "Images", item['image'])  # Correct the path usage here
         try:
             image = Image.open(img_path).convert("RGB")
         except Exception as e:
